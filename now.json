@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "name": "countdown-back",
+    "builds": [
+        { "src": "src/index.js", "use": "@now/node-server" }
+    ],
+    "routes": [
+        { "src": "/.*", "dest": "src/index.js" }
+    ],
+     "env": {
+        "PRISMA_ENDPOINT":"@countdown_prisma_endpoint",
+        "PRISMA_SECRET":"@countdown_prisma_secret",
+        "FRONTEND_URL":"@countdown_frontend_url",
+        "FRONTEND_URL2":"@countdown_frontend_url2",
+        "APP_SECRET_FOR_JWT":"@countdown_app_secret_for_jwt"
+    }
+}

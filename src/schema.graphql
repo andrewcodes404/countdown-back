@@ -1,0 +1,17 @@
+# import * from './schema_prep.graphql'
+
+type SuccessMessage {
+    message: String
+}
+
+type Mutation {
+    userRegister(email: String!, password: String!, name: String!): User!
+    userLogin(email: String!, password: String!): User
+    userLogout: SuccessMessage
+}
+
+type Query {
+    users: [User]!
+    userLoggedIn: User
+}
+
