@@ -12,6 +12,8 @@
         "PRISMA_SECRET":"@countdown_prisma_secret",
         "FRONTEND_URL":"@countdown_frontend_url",
         "FRONTEND_URL2":"@countdown_frontend_url2",
-        "APP_SECRET_FOR_JWT":"@countdown_app_secret_for_jwt"
+        "APP_SECRET_FOR_JWT":"@countdown_app_secret_for_jwt",
+        "API_KEY":"@countdown_api_key",
+        "DOMAIN": "@countdown_domain"
     }
 }
