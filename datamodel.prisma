@@ -7,6 +7,15 @@ enum Permission {
   PERMISSIONUPDATE
 }
 
+type LibraryItem {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  secure_url: String!
+  user: User!
+  index: Int!
+
+}
+
 type User {
   id: ID! @id
   name: String!
@@ -15,6 +24,10 @@ type User {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission] @scalarList(strategy:RELATION)
+  library: [LibraryItem!]
+  cover: String
+  message: String
 }
+
 
 

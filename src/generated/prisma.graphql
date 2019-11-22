@@ -1,5 +1,9 @@
 # source: http://localhost:4444
-# timestamp: Mon Aug 19 2019 16:29:48 GMT+0100 (British Summer Time)
+# timestamp: Thu Nov 21 2019 11:55:14 GMT+0000 (Greenwich Mean Time)
+
+type AggregateLibraryItem {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
@@ -10,6 +14,432 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
+type LibraryItem implements Node {
+  id: ID!
+  createdAt: DateTime!
+  secure_url: String!
+  user: User!
+  index: Int!
+}
+
+"""A connection to a list of items."""
+type LibraryItemConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LibraryItemEdge]!
+  aggregate: AggregateLibraryItem!
+}
+
+input LibraryItemCreateInput {
+  id: ID
+  secure_url: String!
+  index: Int!
+  user: UserCreateOneWithoutLibraryInput!
+}
+
+input LibraryItemCreateManyWithoutUserInput {
+  create: [LibraryItemCreateWithoutUserInput!]
+  connect: [LibraryItemWhereUniqueInput!]
+}
+
+input LibraryItemCreateWithoutUserInput {
+  id: ID
+  secure_url: String!
+  index: Int!
+}
+
+"""An edge in a connection."""
+type LibraryItemEdge {
+  """The item at the end of the edge."""
+  node: LibraryItem!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LibraryItemOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  secure_url_ASC
+  secure_url_DESC
+  index_ASC
+  index_DESC
+}
+
+type LibraryItemPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  secure_url: String!
+  index: Int!
+}
+
+input LibraryItemScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LibraryItemScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LibraryItemScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LibraryItemScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  secure_url: String
+
+  """All values that are not equal to given value."""
+  secure_url_not: String
+
+  """All values that are contained in given list."""
+  secure_url_in: [String!]
+
+  """All values that are not contained in given list."""
+  secure_url_not_in: [String!]
+
+  """All values less than the given value."""
+  secure_url_lt: String
+
+  """All values less than or equal the given value."""
+  secure_url_lte: String
+
+  """All values greater than the given value."""
+  secure_url_gt: String
+
+  """All values greater than or equal the given value."""
+  secure_url_gte: String
+
+  """All values containing the given string."""
+  secure_url_contains: String
+
+  """All values not containing the given string."""
+  secure_url_not_contains: String
+
+  """All values starting with the given string."""
+  secure_url_starts_with: String
+
+  """All values not starting with the given string."""
+  secure_url_not_starts_with: String
+
+  """All values ending with the given string."""
+  secure_url_ends_with: String
+
+  """All values not ending with the given string."""
+  secure_url_not_ends_with: String
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+}
+
+type LibraryItemSubscriptionPayload {
+  mutation: MutationType!
+  node: LibraryItem
+  updatedFields: [String!]
+  previousValues: LibraryItemPreviousValues
+}
+
+input LibraryItemSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LibraryItemSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LibraryItemSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LibraryItemSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LibraryItemWhereInput
+}
+
+input LibraryItemUpdateInput {
+  secure_url: String
+  index: Int
+  user: UserUpdateOneRequiredWithoutLibraryInput
+}
+
+input LibraryItemUpdateManyDataInput {
+  secure_url: String
+  index: Int
+}
+
+input LibraryItemUpdateManyMutationInput {
+  secure_url: String
+  index: Int
+}
+
+input LibraryItemUpdateManyWithoutUserInput {
+  create: [LibraryItemCreateWithoutUserInput!]
+  connect: [LibraryItemWhereUniqueInput!]
+  set: [LibraryItemWhereUniqueInput!]
+  disconnect: [LibraryItemWhereUniqueInput!]
+  delete: [LibraryItemWhereUniqueInput!]
+  update: [LibraryItemUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [LibraryItemUpdateManyWithWhereNestedInput!]
+  deleteMany: [LibraryItemScalarWhereInput!]
+  upsert: [LibraryItemUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input LibraryItemUpdateManyWithWhereNestedInput {
+  where: LibraryItemScalarWhereInput!
+  data: LibraryItemUpdateManyDataInput!
+}
+
+input LibraryItemUpdateWithoutUserDataInput {
+  secure_url: String
+  index: Int
+}
+
+input LibraryItemUpdateWithWhereUniqueWithoutUserInput {
+  where: LibraryItemWhereUniqueInput!
+  data: LibraryItemUpdateWithoutUserDataInput!
+}
+
+input LibraryItemUpsertWithWhereUniqueWithoutUserInput {
+  where: LibraryItemWhereUniqueInput!
+  update: LibraryItemUpdateWithoutUserDataInput!
+  create: LibraryItemCreateWithoutUserInput!
+}
+
+input LibraryItemWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LibraryItemWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LibraryItemWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LibraryItemWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  secure_url: String
+
+  """All values that are not equal to given value."""
+  secure_url_not: String
+
+  """All values that are contained in given list."""
+  secure_url_in: [String!]
+
+  """All values that are not contained in given list."""
+  secure_url_not_in: [String!]
+
+  """All values less than the given value."""
+  secure_url_lt: String
+
+  """All values less than or equal the given value."""
+  secure_url_lte: String
+
+  """All values greater than the given value."""
+  secure_url_gt: String
+
+  """All values greater than or equal the given value."""
+  secure_url_gte: String
+
+  """All values containing the given string."""
+  secure_url_contains: String
+
+  """All values not containing the given string."""
+  secure_url_not_contains: String
+
+  """All values starting with the given string."""
+  secure_url_starts_with: String
+
+  """All values not starting with the given string."""
+  secure_url_not_starts_with: String
+
+  """All values ending with the given string."""
+  secure_url_ends_with: String
+
+  """All values not ending with the given string."""
+  secure_url_not_ends_with: String
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+  user: UserWhereInput
+}
+
+input LibraryItemWhereUniqueInput {
+  id: ID
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -17,11 +447,17 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
+  createLibraryItem(data: LibraryItemCreateInput!): LibraryItem!
   createUser(data: UserCreateInput!): User!
+  updateLibraryItem(data: LibraryItemUpdateInput!, where: LibraryItemWhereUniqueInput!): LibraryItem
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  deleteLibraryItem(where: LibraryItemWhereUniqueInput!): LibraryItem
   deleteUser(where: UserWhereUniqueInput!): User
+  upsertLibraryItem(where: LibraryItemWhereUniqueInput!, create: LibraryItemCreateInput!, update: LibraryItemUpdateInput!): LibraryItem!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateManyLibraryItems(data: LibraryItemUpdateManyMutationInput!, where: LibraryItemWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  deleteManyLibraryItems(where: LibraryItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
@@ -62,8 +498,11 @@ enum Permission {
 }
 
 type Query {
+  libraryItems(where: LibraryItemWhereInput, orderBy: LibraryItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LibraryItem]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  libraryItem(where: LibraryItemWhereUniqueInput!): LibraryItem
   user(where: UserWhereUniqueInput!): User
+  libraryItemsConnection(where: LibraryItemWhereInput, orderBy: LibraryItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LibraryItemConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
@@ -74,6 +513,7 @@ type Query {
 }
 
 type Subscription {
+  libraryItem(where: LibraryItemSubscriptionWhereInput): LibraryItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -85,6 +525,9 @@ type User implements Node {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
+  library(where: LibraryItemWhereInput, orderBy: LibraryItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LibraryItem!]
+  cover: String
+  message: String
 }
 
 """A connection to a list of items."""
@@ -104,11 +547,31 @@ input UserCreateInput {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
+  cover: String
+  message: String
   permissions: UserCreatepermissionsInput
+  library: LibraryItemCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutLibraryInput {
+  create: UserCreateWithoutLibraryInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreatepermissionsInput {
   set: [Permission!]
+}
+
+input UserCreateWithoutLibraryInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  cover: String
+  message: String
+  permissions: UserCreatepermissionsInput
 }
 
 """An edge in a connection."""
@@ -133,6 +596,10 @@ enum UserOrderByInput {
   resetToken_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
+  cover_ASC
+  cover_DESC
+  message_ASC
+  message_DESC
 }
 
 type UserPreviousValues {
@@ -143,6 +610,8 @@ type UserPreviousValues {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
+  cover: String
+  message: String
 }
 
 type UserSubscriptionPayload {
@@ -188,7 +657,10 @@ input UserUpdateInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  cover: String
+  message: String
   permissions: UserUpdatepermissionsInput
+  library: LibraryItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -197,11 +669,36 @@ input UserUpdateManyMutationInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  cover: String
+  message: String
   permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdateOneRequiredWithoutLibraryInput {
+  create: UserCreateWithoutLibraryInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutLibraryDataInput
+  upsert: UserUpsertWithoutLibraryInput
 }
 
 input UserUpdatepermissionsInput {
   set: [Permission!]
+}
+
+input UserUpdateWithoutLibraryDataInput {
+  name: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  cover: String
+  message: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpsertWithoutLibraryInput {
+  update: UserUpdateWithoutLibraryDataInput!
+  create: UserCreateWithoutLibraryInput!
 }
 
 input UserWhereInput {
@@ -435,6 +932,89 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: Float
+  cover: String
+
+  """All values that are not equal to given value."""
+  cover_not: String
+
+  """All values that are contained in given list."""
+  cover_in: [String!]
+
+  """All values that are not contained in given list."""
+  cover_not_in: [String!]
+
+  """All values less than the given value."""
+  cover_lt: String
+
+  """All values less than or equal the given value."""
+  cover_lte: String
+
+  """All values greater than the given value."""
+  cover_gt: String
+
+  """All values greater than or equal the given value."""
+  cover_gte: String
+
+  """All values containing the given string."""
+  cover_contains: String
+
+  """All values not containing the given string."""
+  cover_not_contains: String
+
+  """All values starting with the given string."""
+  cover_starts_with: String
+
+  """All values not starting with the given string."""
+  cover_not_starts_with: String
+
+  """All values ending with the given string."""
+  cover_ends_with: String
+
+  """All values not ending with the given string."""
+  cover_not_ends_with: String
+  message: String
+
+  """All values that are not equal to given value."""
+  message_not: String
+
+  """All values that are contained in given list."""
+  message_in: [String!]
+
+  """All values that are not contained in given list."""
+  message_not_in: [String!]
+
+  """All values less than the given value."""
+  message_lt: String
+
+  """All values less than or equal the given value."""
+  message_lte: String
+
+  """All values greater than the given value."""
+  message_gt: String
+
+  """All values greater than or equal the given value."""
+  message_gte: String
+
+  """All values containing the given string."""
+  message_contains: String
+
+  """All values not containing the given string."""
+  message_not_contains: String
+
+  """All values starting with the given string."""
+  message_starts_with: String
+
+  """All values not starting with the given string."""
+  message_not_starts_with: String
+
+  """All values ending with the given string."""
+  message_ends_with: String
+
+  """All values not ending with the given string."""
+  message_not_ends_with: String
+  library_every: LibraryItemWhereInput
+  library_some: LibraryItemWhereInput
+  library_none: LibraryItemWhereInput
 }
 
 input UserWhereUniqueInput {

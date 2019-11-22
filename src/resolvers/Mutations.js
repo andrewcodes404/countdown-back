@@ -1,6 +1,12 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+var mailgun = require('mailgun-js')({
+    apiKey: process.env.API_KEY,
+    domain: process.env.DOMAIN,
+    host: 'api.eu.mailgun.net',
+})
+
 const Mutations = {
     async userRegister(parent, args, ctx, info) {
         // 2. lowercase their email to prevent accidents
@@ -33,6 +39,7 @@ const Mutations = {
         // 7. Finalllllly we return the user to the browser
         return user
     },
+
     async userLogin(parent, { email, password }, ctx, info) {
         // 1. check if there is a user with that email
         const user = await ctx.db.query.user({ where: { email } })
@@ -54,13 +61,104 @@ const Mutations = {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24 * 365,
         })
+
+        //send email that the user logged in!!!
+        const data = {
+            // from: `${user.name} <mg@countdownwow.com>`,
+            from: 'CDW Admin <mg@countdownwow.com>',
+            // from: '<mg@countdownwow.com>',
+            to: 'hello@countdownwow.com',
+            subject: 'User Login',
+            text: `User ${user.name} has logged in 🍰`,
+        }
+
+        mailgun.messages().send(data, (error, body) => {
+            if (error) {
+                console.log('error = ', error)
+            }
+            // console.log(user, body)
+        })
+
         // 5. Return the user
         return user
     },
 
     userLogout(parent, args, ctx, info) {
         ctx.response.clearCookie('token')
+
         return { message: 'Goodbye!' }
+    },
+
+    async createLibraryItem(parent, args, ctx, info) {
+        const libraryItem = await ctx.db.mutation.createLibraryItem(
+            {
+                data: {
+                    // This is how to create a relationship between the Item and the User
+                    user: {
+                        connect: {
+                            id: ctx.request.userId,
+                        },
+                    },
+                    ...args,
+                },
+            },
+            info
+        )
+
+        return libraryItem
+    },
+
+    updateLibraryItem(parent, args, ctx, info) {
+        // first take a copy of the updates
+
+        const updates = { ...args }
+        console.log('updates = ', updates)
+
+        // remove the ID from the updates
+        delete updates.id
+
+        // run the update method
+        return ctx.db.mutation.updateLibraryItem(
+            {
+                data: {
+                    index: updates.index,
+                },
+                where: {
+                    id: args.id,
+                },
+            },
+            info
+        )
+    },
+
+    async deleteLibraryItem(parent, args, ctx, info) {
+        const where = { id: args.id }
+        return ctx.db.mutation.deleteLibraryItem({ where }, info)
+    },
+
+    updateUser(parent, args, ctx, info) {
+        // first take a copy of the updates
+        console.log('args = ', args)
+        const updates = { ...args }
+
+        console.log('updates = ', updates)
+
+        // remove the ID from the updates
+        delete updates.id
+
+        // run the update method
+        return ctx.db.mutation.updateUser(
+            {
+                data: {
+                    cover: updates.cover,
+                    message: updates.message,
+                },
+                where: {
+                    id: args.id,
+                },
+            },
+            info
+        )
     },
 }
 
