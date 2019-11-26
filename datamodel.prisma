@@ -11,6 +11,9 @@ type LibraryItem {
   id: ID! @id
   createdAt: DateTime! @createdAt
   secure_url: String!
+  url600: String!
+  url2400: String!
+  url200: String!
   user: User!
   index: Int!
 

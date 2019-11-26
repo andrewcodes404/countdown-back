@@ -51,6 +51,9 @@ type LibraryItem implements Node {
   id: ID!
   createdAt: DateTime!
   secure_url: String!
+  url600: String!
+  url2400: String!
+  url200: String!
   user: User!
   index: Int!
 }
@@ -67,6 +70,9 @@ type LibraryItemConnection {
 input LibraryItemCreateInput {
   id: ID
   secure_url: String!
+  url600: String!
+  url2400: String!
+  url200: String!
   index: Int!
   user: UserCreateOneWithoutLibraryInput!
 }
@@ -79,6 +85,9 @@ input LibraryItemCreateManyWithoutUserInput {
 input LibraryItemCreateWithoutUserInput {
   id: ID
   secure_url: String!
+  url600: String!
+  url2400: String!
+  url200: String!
   index: Int!
 }
 
@@ -97,6 +106,12 @@ enum LibraryItemOrderByInput {
   createdAt_DESC
   secure_url_ASC
   secure_url_DESC
+  url600_ASC
+  url600_DESC
+  url2400_ASC
+  url2400_DESC
+  url200_ASC
+  url200_DESC
   index_ASC
   index_DESC
 }
@@ -105,6 +120,9 @@ type LibraryItemPreviousValues {
   id: ID!
   createdAt: DateTime!
   secure_url: String!
+  url600: String!
+  url2400: String!
+  url200: String!
   index: Int!
 }
 
@@ -184,6 +202,87 @@ input LibraryItemScalarWhereInput {
   secure_url_ends_with: String
   """All values not ending with the given string."""
   secure_url_not_ends_with: String
+  url600: String
+  """All values that are not equal to given value."""
+  url600_not: String
+  """All values that are contained in given list."""
+  url600_in: [String!]
+  """All values that are not contained in given list."""
+  url600_not_in: [String!]
+  """All values less than the given value."""
+  url600_lt: String
+  """All values less than or equal the given value."""
+  url600_lte: String
+  """All values greater than the given value."""
+  url600_gt: String
+  """All values greater than or equal the given value."""
+  url600_gte: String
+  """All values containing the given string."""
+  url600_contains: String
+  """All values not containing the given string."""
+  url600_not_contains: String
+  """All values starting with the given string."""
+  url600_starts_with: String
+  """All values not starting with the given string."""
+  url600_not_starts_with: String
+  """All values ending with the given string."""
+  url600_ends_with: String
+  """All values not ending with the given string."""
+  url600_not_ends_with: String
+  url2400: String
+  """All values that are not equal to given value."""
+  url2400_not: String
+  """All values that are contained in given list."""
+  url2400_in: [String!]
+  """All values that are not contained in given list."""
+  url2400_not_in: [String!]
+  """All values less than the given value."""
+  url2400_lt: String
+  """All values less than or equal the given value."""
+  url2400_lte: String
+  """All values greater than the given value."""
+  url2400_gt: String
+  """All values greater than or equal the given value."""
+  url2400_gte: String
+  """All values containing the given string."""
+  url2400_contains: String
+  """All values not containing the given string."""
+  url2400_not_contains: String
+  """All values starting with the given string."""
+  url2400_starts_with: String
+  """All values not starting with the given string."""
+  url2400_not_starts_with: String
+  """All values ending with the given string."""
+  url2400_ends_with: String
+  """All values not ending with the given string."""
+  url2400_not_ends_with: String
+  url200: String
+  """All values that are not equal to given value."""
+  url200_not: String
+  """All values that are contained in given list."""
+  url200_in: [String!]
+  """All values that are not contained in given list."""
+  url200_not_in: [String!]
+  """All values less than the given value."""
+  url200_lt: String
+  """All values less than or equal the given value."""
+  url200_lte: String
+  """All values greater than the given value."""
+  url200_gt: String
+  """All values greater than or equal the given value."""
+  url200_gte: String
+  """All values containing the given string."""
+  url200_contains: String
+  """All values not containing the given string."""
+  url200_not_contains: String
+  """All values starting with the given string."""
+  url200_starts_with: String
+  """All values not starting with the given string."""
+  url200_not_starts_with: String
+  """All values ending with the given string."""
+  url200_ends_with: String
+  """All values not ending with the given string."""
+  url200_not_ends_with: String
   index: Int
   """All values that are not equal to given value."""
   index_not: Int
@@ -228,17 +327,26 @@ input LibraryItemSubscriptionWhereInput {
 
 input LibraryItemUpdateInput {
   secure_url: String
+  url600: String
+  url2400: String
+  url200: String
   index: Int
   user: UserUpdateOneRequiredWithoutLibraryInput
 }
 
 input LibraryItemUpdateManyDataInput {
   secure_url: String
+  url600: String
+  url2400: String
+  url200: String
   index: Int
 }
 
 input LibraryItemUpdateManyMutationInput {
   secure_url: String
+  url600: String
+  url2400: String
+  url200: String
   index: Int
 }
 
@@ -261,6 +369,9 @@ input LibraryItemUpdateManyWithWhereNestedInput {
 
 input LibraryItemUpdateWithoutUserDataInput {
   secure_url: String
+  url600: String
+  url2400: String
+  url200: String
   index: Int
 }
 
@@ -351,6 +462,87 @@ input LibraryItemWhereInput {
   secure_url_ends_with: String
   """All values not ending with the given string."""
   secure_url_not_ends_with: String
+  url600: String
+  """All values that are not equal to given value."""
+  url600_not: String
+  """All values that are contained in given list."""
+  url600_in: [String!]
+  """All values that are not contained in given list."""
+  url600_not_in: [String!]
+  """All values less than the given value."""
+  url600_lt: String
+  """All values less than or equal the given value."""
+  url600_lte: String
+  """All values greater than the given value."""
+  url600_gt: String
+  """All values greater than or equal the given value."""
+  url600_gte: String
+  """All values containing the given string."""
+  url600_contains: String
+  """All values not containing the given string."""
+  url600_not_contains: String
+  """All values starting with the given string."""
+  url600_starts_with: String
+  """All values not starting with the given string."""
+  url600_not_starts_with: String
+  """All values ending with the given string."""
+  url600_ends_with: String
+  """All values not ending with the given string."""
+  url600_not_ends_with: String
+  url2400: String
+  """All values that are not equal to given value."""
+  url2400_not: String
+  """All values that are contained in given list."""
+  url2400_in: [String!]
+  """All values that are not contained in given list."""
+  url2400_not_in: [String!]
+  """All values less than the given value."""
+  url2400_lt: String
+  """All values less than or equal the given value."""
+  url2400_lte: String
+  """All values greater than the given value."""
+  url2400_gt: String
+  """All values greater than or equal the given value."""
+  url2400_gte: String
+  """All values containing the given string."""
+  url2400_contains: String
+  """All values not containing the given string."""
+  url2400_not_contains: String
+  """All values starting with the given string."""
+  url2400_starts_with: String
+  """All values not starting with the given string."""
+  url2400_not_starts_with: String
+  """All values ending with the given string."""
+  url2400_ends_with: String
+  """All values not ending with the given string."""
+  url2400_not_ends_with: String
+  url200: String
+  """All values that are not equal to given value."""
+  url200_not: String
+  """All values that are contained in given list."""
+  url200_in: [String!]
+  """All values that are not contained in given list."""
+  url200_not_in: [String!]
+  """All values less than the given value."""
+  url200_lt: String
+  """All values less than or equal the given value."""
+  url200_lte: String
+  """All values greater than the given value."""
+  url200_gt: String
+  """All values greater than or equal the given value."""
+  url200_gte: String
+  """All values containing the given string."""
+  url200_contains: String
+  """All values not containing the given string."""
+  url200_not_contains: String
+  """All values starting with the given string."""
+  url200_starts_with: String
+  """All values not starting with the given string."""
+  url200_not_starts_with: String
+  """All values ending with the given string."""
+  url200_ends_with: String
+  """All values not ending with the given string."""
+  url200_not_ends_with: String
   index: Int
   """All values that are not equal to given value."""
   index_not: Int

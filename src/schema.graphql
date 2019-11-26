@@ -8,7 +8,7 @@ type Mutation {
     userRegister(email: String!, password: String!, name: String!): User!
     userLogin(email: String!, password: String!): User
     userLogout: SuccessMessage
-    createLibraryItem(secure_url: String!, index: Int!): LibraryItem!
+    createLibraryItem(secure_url: String!, url600: String!, url2400: String!, url200: String!, index: Int!): LibraryItem!
     updateLibraryItem( id: ID!, index: Int!): LibraryItem!
     deleteLibraryItem(id: ID!): LibraryItem
 

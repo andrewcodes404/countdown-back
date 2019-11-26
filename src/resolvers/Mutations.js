@@ -90,6 +90,8 @@ const Mutations = {
     },
 
     async createLibraryItem(parent, args, ctx, info) {
+        console.log('args🏴‍☠️ = ', args)
+
         const libraryItem = await ctx.db.mutation.createLibraryItem(
             {
                 data: {
