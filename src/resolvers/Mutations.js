@@ -76,7 +76,6 @@ const Mutations = {
             if (error) {
                 console.log('error = ', error)
             }
-            // console.log(user, body)
         })
 
         // 5. Return the user
@@ -90,8 +89,6 @@ const Mutations = {
     },
 
     async createLibraryItem(parent, args, ctx, info) {
-        console.log('args🏴‍☠️ = ', args)
-
         const libraryItem = await ctx.db.mutation.createLibraryItem(
             {
                 data: {
@@ -114,7 +111,6 @@ const Mutations = {
         // first take a copy of the updates
 
         const updates = { ...args }
-        console.log('updates = ', updates)
 
         // remove the ID from the updates
         delete updates.id
@@ -140,10 +136,8 @@ const Mutations = {
 
     updateUser(parent, args, ctx, info) {
         // first take a copy of the updates
-        console.log('args = ', args)
-        const updates = { ...args }
 
-        console.log('updates = ', updates)
+        const updates = { ...args }
 
         // remove the ID from the updates
         delete updates.id
@@ -152,8 +146,11 @@ const Mutations = {
         return ctx.db.mutation.updateUser(
             {
                 data: {
-                    cover: updates.cover,
                     message: updates.message,
+                    coverFull: updates.coverFull,
+                    cover200: updates.cover200,
+                    cover600: updates.cover600,
+                    cover3000: updates.cover3000,
                 },
                 where: {
                     id: args.id,

@@ -28,7 +28,10 @@ type User {
   resetTokenExpiry: Float
   permissions: [Permission] @scalarList(strategy:RELATION)
   library: [LibraryItem!]
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
 }
 

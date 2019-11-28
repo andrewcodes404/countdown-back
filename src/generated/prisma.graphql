@@ -1,5 +1,5 @@
 # source: http://localhost:4444
-# timestamp: Tue Nov 26 2019 16:15:25 GMT+0000 (Greenwich Mean Time)
+# timestamp: Thu Nov 28 2019 11:04:25 GMT+0000 (Greenwich Mean Time)
 
 type AggregateLibraryItem {
   count: Int!
@@ -796,7 +796,10 @@ type User implements Node {
   resetTokenExpiry: Float
   permissions: [Permission!]!
   library(where: LibraryItemWhereInput, orderBy: LibraryItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LibraryItem!]
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
 }
 
@@ -817,7 +820,10 @@ input UserCreateInput {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
   permissions: UserCreatepermissionsInput
   library: LibraryItemCreateManyWithoutUserInput
@@ -839,7 +845,10 @@ input UserCreateWithoutLibraryInput {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
   permissions: UserCreatepermissionsInput
 }
@@ -866,8 +875,14 @@ enum UserOrderByInput {
   resetToken_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
-  cover_ASC
-  cover_DESC
+  coverFull_ASC
+  coverFull_DESC
+  cover200_ASC
+  cover200_DESC
+  cover600_ASC
+  cover600_DESC
+  cover3000_ASC
+  cover3000_DESC
   message_ASC
   message_DESC
 }
@@ -880,7 +895,10 @@ type UserPreviousValues {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
 }
 
@@ -927,7 +945,10 @@ input UserUpdateInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
   permissions: UserUpdatepermissionsInput
   library: LibraryItemUpdateManyWithoutUserInput
@@ -939,7 +960,10 @@ input UserUpdateManyMutationInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
   permissions: UserUpdatepermissionsInput
 }
@@ -961,7 +985,10 @@ input UserUpdateWithoutLibraryDataInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
-  cover: String
+  coverFull: String
+  cover200: String
+  cover600: String
+  cover3000: String
   message: String
   permissions: UserUpdatepermissionsInput
 }
@@ -1202,46 +1229,166 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: Float
-  cover: String
+  coverFull: String
 
   """All values that are not equal to given value."""
-  cover_not: String
+  coverFull_not: String
 
   """All values that are contained in given list."""
-  cover_in: [String!]
+  coverFull_in: [String!]
 
   """All values that are not contained in given list."""
-  cover_not_in: [String!]
+  coverFull_not_in: [String!]
 
   """All values less than the given value."""
-  cover_lt: String
+  coverFull_lt: String
 
   """All values less than or equal the given value."""
-  cover_lte: String
+  coverFull_lte: String
 
   """All values greater than the given value."""
-  cover_gt: String
+  coverFull_gt: String
 
   """All values greater than or equal the given value."""
-  cover_gte: String
+  coverFull_gte: String
 
   """All values containing the given string."""
-  cover_contains: String
+  coverFull_contains: String
 
   """All values not containing the given string."""
-  cover_not_contains: String
+  coverFull_not_contains: String
 
   """All values starting with the given string."""
-  cover_starts_with: String
+  coverFull_starts_with: String
 
   """All values not starting with the given string."""
-  cover_not_starts_with: String
+  coverFull_not_starts_with: String
 
   """All values ending with the given string."""
-  cover_ends_with: String
+  coverFull_ends_with: String
 
   """All values not ending with the given string."""
-  cover_not_ends_with: String
+  coverFull_not_ends_with: String
+  cover200: String
+
+  """All values that are not equal to given value."""
+  cover200_not: String
+
+  """All values that are contained in given list."""
+  cover200_in: [String!]
+
+  """All values that are not contained in given list."""
+  cover200_not_in: [String!]
+
+  """All values less than the given value."""
+  cover200_lt: String
+
+  """All values less than or equal the given value."""
+  cover200_lte: String
+
+  """All values greater than the given value."""
+  cover200_gt: String
+
+  """All values greater than or equal the given value."""
+  cover200_gte: String
+
+  """All values containing the given string."""
+  cover200_contains: String
+
+  """All values not containing the given string."""
+  cover200_not_contains: String
+
+  """All values starting with the given string."""
+  cover200_starts_with: String
+
+  """All values not starting with the given string."""
+  cover200_not_starts_with: String
+
+  """All values ending with the given string."""
+  cover200_ends_with: String
+
+  """All values not ending with the given string."""
+  cover200_not_ends_with: String
+  cover600: String
+
+  """All values that are not equal to given value."""
+  cover600_not: String
+
+  """All values that are contained in given list."""
+  cover600_in: [String!]
+
+  """All values that are not contained in given list."""
+  cover600_not_in: [String!]
+
+  """All values less than the given value."""
+  cover600_lt: String
+
+  """All values less than or equal the given value."""
+  cover600_lte: String
+
+  """All values greater than the given value."""
+  cover600_gt: String
+
+  """All values greater than or equal the given value."""
+  cover600_gte: String
+
+  """All values containing the given string."""
+  cover600_contains: String
+
+  """All values not containing the given string."""
+  cover600_not_contains: String
+
+  """All values starting with the given string."""
+  cover600_starts_with: String
+
+  """All values not starting with the given string."""
+  cover600_not_starts_with: String
+
+  """All values ending with the given string."""
+  cover600_ends_with: String
+
+  """All values not ending with the given string."""
+  cover600_not_ends_with: String
+  cover3000: String
+
+  """All values that are not equal to given value."""
+  cover3000_not: String
+
+  """All values that are contained in given list."""
+  cover3000_in: [String!]
+
+  """All values that are not contained in given list."""
+  cover3000_not_in: [String!]
+
+  """All values less than the given value."""
+  cover3000_lt: String
+
+  """All values less than or equal the given value."""
+  cover3000_lte: String
+
+  """All values greater than the given value."""
+  cover3000_gt: String
+
+  """All values greater than or equal the given value."""
+  cover3000_gte: String
+
+  """All values containing the given string."""
+  cover3000_contains: String
+
+  """All values not containing the given string."""
+  cover3000_not_contains: String
+
+  """All values starting with the given string."""
+  cover3000_starts_with: String
+
+  """All values not starting with the given string."""
+  cover3000_not_starts_with: String
+
+  """All values ending with the given string."""
+  cover3000_ends_with: String
+
+  """All values not ending with the given string."""
+  cover3000_not_ends_with: String
   message: String
 
   """All values that are not equal to given value."""

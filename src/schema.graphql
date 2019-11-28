@@ -11,8 +11,7 @@ type Mutation {
     createLibraryItem(secure_url: String!, url600: String!, url2400: String!, url200: String!, index: Int!): LibraryItem!
     updateLibraryItem( id: ID!, index: Int!): LibraryItem!
     deleteLibraryItem(id: ID!): LibraryItem
-
-    updateUser(id: ID!, cover: String, message:String): User!
+    updateUser(id: ID!, cover: String, message:String, coverFull:String, cover200:String, cover600:String, cover3000:String  ): User!
 
 }
 
